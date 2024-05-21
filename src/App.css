@@ -1,0 +1,49 @@
+
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  height: 500px;
+
+}
+
+.read-the-docs {
+  color: #888;
+}
+.checked {
+  color: orange;
+}
+.content{
+  display: flex;
+  padding: 40px;
+}
+
+.book {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 80%;
+  justify-content: space-between;
+}
+.book > div {
+  width: calc(50% - 10px); /* Chỉ định chiều rộng để hiển thị 2 cột trên màn hình điện thoại */
+}
+
+@media only screen and (min-width: 576px) {
+  .book > div {
+    width: calc(25% - 10px); /* Giữ nguyên chiều rộng để hiển thị 4 cột trên các thiết bị có độ rộng màn hình lớn hơn 576px */
+  }
+}
