@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import './Book.css';
+import renderStars from './renderStart';
 
 function Book({ data }) {
     const {
         id,
         images,
         name,
+        rating_average,
         quantity_sold,
         list_price,
         original_price,
@@ -22,16 +24,15 @@ function Book({ data }) {
             <div className="card-body">
                 <h5>{name}</h5>
                 <div>
-                    <img src="start.png"/>
-                    <img src="start.png"/>
-                    <img src="start.png"/>
-                    <img src="start.png"/>
-                    <img src="start.png"/>
+                {renderStars(rating_average)}
                     <span>  | {quantity_sold?.text || "Đã bán 1000+"}</span>
                 </div>
                 <div className="price-discount">
                     <h4>{list_price}<sup style={{ top: "-0.5em" }}> ₫ </sup></h4>
-                    <h5 className="discount">{discount}%</h5>
+                    <h5 className="discount">-{discount}%</h5>
+                </div>
+                <div>
+                    <h6>Giao siêu tốc 2h</h6>
                 </div>
             </div>
         </Link>

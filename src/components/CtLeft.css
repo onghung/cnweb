@@ -8,15 +8,15 @@
 }
 
 .additional-options-button {
-  display: block; /* Display the button by default */
+  display: block; 
 }
 
 @media only screen and (max-width: 600px) {
   .danhmuc {
-    display: none; /* Hide the entire danhmc class content on small screens */
+    display: none; 
   }
 
   .additional-options-button {
-    display: none; /* Hide the button on small screens */
+    display: none; 
   }
 }

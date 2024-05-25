@@ -3,9 +3,10 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { books } from '../../data.json'
 import "./BookDetail.css"
+import renderStars from '../components/renderStart';
+
 
 function BookDetail() {
-    // react hook
     const { id } = useParams()
     const book = books.find(item => item.id == id)
     return <>
@@ -36,16 +37,10 @@ function BookDetail() {
                                                 <div class="content">
                                                     <span class="slider" >
                                                         <a data-view-id="pdp_main_view_photo" class="style__ThumbnailItemStyled-sc-18wegpu-1 eYAAt active">
-                                                        <picture class="webpimg-container">
-                                                                <source type="image/webp" srcSet="https://salt.tikicdn.com/cache/100x100/ts/product/82/82/80/c542073200c6e95d3e89840b2f41ce2e.jpg.webp 1x, https://salt.tikicdn.com/cache/100x100/ts/product/82/82/80/c542073200c6e95d3e89840b2f41ce2e.jpg.webp 2x"/>
-                                                                <img width="47" height="47" style={{width:"47px"}} alt="product-img-0" src="https://salt.tikicdn.com/cache/200x280/ts/product/82/82/80/c542073200c6e95d3e89840b2f41ce2e.jpg" srcSet="https://salt.tikicdn.com/cache/100x100/ts/product/82/82/80/c542073200c6e95d3e89840b2f41ce2e.jpg 1x, https://salt.tikicdn.com/cache/100x100/ts/product/82/82/80/c542073200c6e95d3e89840b2f41ce2e.jpg 2x" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"/>
-                                                        </picture>
+                                                        <img src={book.images[0].base_url} alt=""></img>
                                                         </a>
                                                         <a data-view-id="pdp_main_view_photo" class="style__ThumbnailItemStyled-sc-18wegpu-1 eYAAt">
-                                                        <picture class="webpimg-container">
-                                                            <source type="image/webp" srcSet="https://salt.tikicdn.com/cache/100x100/ts/product/17/7c/ee/170e84629d730657e2e43c0ebaae4fb6.jpg.webp 1x, https://salt.tikicdn.com/cache/100x100/ts/product/17/7c/ee/170e84629d730657e2e43c0ebaae4fb6.jpg.webp 2x"/>
-                                                            <img width="47" height="47" style={{width:"47px"}} alt="product-img-1" src="https://salt.tikicdn.com/cache/200x280/ts/product/17/7c/ee/170e84629d730657e2e43c0ebaae4fb6.jpg" srcSet="https://salt.tikicdn.com/cache/100x100/ts/product/17/7c/ee/170e84629d730657e2e43c0ebaae4fb6.jpg 1x, https://salt.tikicdn.com/cache/100x100/ts/product/17/7c/ee/170e84629d730657e2e43c0ebaae4fb6.jpg 2x" class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"/>
-                                                        </picture>
+                                                        <img src={book.images[0].base_url} alt=""></img>
                                                         </a>
                                                     </span>
                                                 </div>
@@ -76,20 +71,10 @@ function BookDetail() {
                                                             </span>
                                                         </div>
                                                         <h1 class="Title__TitledStyled-sc-1kxsq5b-0 cvyKhs">{book.name}</h1>
-                                                      
+                                                            
                                                             <div class="start">
-                                                                <div class="styles__StyledReview-sc-1swui9f-1 dXPbue">
-                                                                    <div class="starr">5.0</div>
-                                                                    <div class="sao">
-                                                                        <span class="star fa fa-star checked"></span>
-                                                                        <span class="star fa fa-star checked"></span>
-                                                                        <span class="star fa fa-star checked"></span>
-                                                                        <span class="star fa fa-star checked"></span>
-                                                                        <span class="star fa fa-star checked"></span>
-                                                                    </div>
-                                                                    <a class="number" data-view-id="pdp_main_view_review">(225)</a>
-                                                                    <div class="styles__BelowTitleSeparator-sc-1swui9f-2 fctQDC"></div>
-                                                                </div>
+                                                            <div data-view-id="pdp_quantity_sold" class="styles__StyledQuantitySold-sc-1swui9f-3 bExXAB">{book.rating_average}</div>
+                                                            {renderStars(book.rating_average)}
                                                                 <div data-view-id="pdp_quantity_sold" class="styles__StyledQuantitySold-sc-1swui9f-3 bExXAB">{book?.quantity_sold?.text || "Đã bán 1000+"}</div>
                                                             </div>
                                                     </div>
@@ -99,21 +84,50 @@ function BookDetail() {
                                                                 <div class="product-price__current-price">
                                                                     {book.list_price}<sup>₫</sup>
                                                                 </div>
-                                                                <div class="product-price__discount-rate">{Math.round(((book.original_price - book.current_seller.price)/book.original_price)*100)}</div>
+                                                                <div class="product-price__discount-rate">-{Math.round(((book.original_price - book.current_seller.price)/book.original_price)*100)}%</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                            Thông tin chi tiết
+                                            <table>
+                                                <tr>
+                                                    <td>Tác giả</td>
+                                                    <td>{book.authors[0].name}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Công ty phát hành</td>
+                                                    <td>{book.specifications[0].attributes.find(attr => attr.code === "publisher_vn").value}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ngày xuất bản</td>
+                                                    <td>{book.specifications[0].attributes.find(attr => attr.code === "publication_date").value}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kích thước</td>
+                                                    <td>{book.specifications[0].attributes.find(attr => attr.code === "dimensions").value}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Loại bìa</td>
+                                                    <td>{book.specifications[0].attributes.find(attr => attr.code === "book_cover").value}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Số trang</td>
+                                                    <td>{book.specifications[0].attributes.find(attr => attr.code === "number_of_page").value}</td>
+                                                </tr>
+                                            </table>
+                                     
                                         <div  class="WidgetTitle__WidgetContainerStyled-sc-1ikmn8z-0 iHMNqO tes">
                                             <div class="WidgetTitle__WidgetTitleStyled-sc-1ikmn8z-1 eaKcuo">
                                                 Mô tả sản phẩm
                                             </div>
-                                            <div class="style__Wrapper-sc-13sel60-0 dGqjau content">
-                                                <div class="ToggleContent__Wrapper-sc-fbuwol-1 xbBes">
-                                                    <div class="ToggleContent__View-sc-fbuwol-0 imwRtb" style={{overflow: "hidden", height: "250px"}}>
-                                                       {book.description}
+                                            <div className="style__Wrapper-sc-13sel60-0 dGqjau content">
+                                                <div className="ToggleContent__Wrapper-sc-fbuwol-1 xbBes">
+                                                    <div className="ToggleContent__View-sc-fbuwol-0 imwRtb" style={{ overflow: "hidden", height: "250px" }}>
+                                                        <div dangerouslySetInnerHTML={{ __html: book.description }} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +189,7 @@ function BookDetail() {
             </div>
         <Footer />
     </div>
-
     </>
+
 }
 export default BookDetail;

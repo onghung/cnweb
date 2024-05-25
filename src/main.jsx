@@ -13,7 +13,6 @@ const routers = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    // Dynamic segment
     path: "/book/:id",
     element: <BookDetail />
   }

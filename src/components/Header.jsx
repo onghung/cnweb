@@ -4,7 +4,7 @@ import { faCartShopping, faFaceSmileWink, faHome, faMagnifyingGlass } from '@for
 import { books } from '../../data.json';
 import './Header.css';
 
-function Header() {
+function Header({ onSearchResults }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -13,7 +13,10 @@ function Header() {
             book.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setSearchResults(results);
-    }, [searchTerm]);
+        if (typeof onSearchResults === 'function') {
+            onSearchResults(results);
+        }
+    }, [searchTerm, onSearchResults]);
 
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
